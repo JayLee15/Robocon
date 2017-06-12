@@ -75,10 +75,15 @@ int8_t VeloticyData1[8]={0x10,0xc4,0xFF,0x9c,0x55,0x55,0x55,0x55};			//2ºÅµç»úËÙ
 int8_t VeloticyData2[8]={0x10,0xc4,0xFF,0x9c,0x55,0x55,0x55,0x55};  		//3ºÅµç»úËÙ¶È²ÎÊý
 int8_t VeloticyData3[8]={0x10,0xc4,0xFF,0x9c,0x55,0x55,0x55,0x55};			//4ºÅµç»úËÙ¶È²ÎÊý
 int8_t LocationModeData[8]={0x04,0x55,0x55,0x55,0x55,0x55,0x55,0x55};
-int8_t LocationData[8]={0x07,0xD0,0x55,0x55,0xFF,0xFF,0x28,0x90};
-int8_t LocationData1[8]={0x09,0xC4,0x55,0x55,0xFF,0xFF,0xE8,0x90};
+int8_t LocationData[8]={0x05,0x14,0x55,0x55,0xFF,0xFF,0x28,0x90};
+int8_t LocationData1[8]={0x04,0x44,0x55,0x55,0xFF,0xFF,0xE8,0x90};
 int8_t LimitModeData[8]={0x00,0x01,0x55,0x55,0x55,0x55,0x55,0x55};
-int8_t ShootData[8]={0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};					 //·¢Éä·ÉÅÌ
+int8_t ShootData1[8]={0x01,0x00,0x00,0x00,0x00,0x00,0x00,0x00};					 //·¢Éä·ÉÅÌ
+int8_t ShootData2[8]={0x02,0x00,0x00,0x00,0x00,0x00,0x00,0x00};					 //·¢Éä·ÉÅÌ
+int8_t ShootData3[8]={0x03,0x00,0x00,0x00,0x00,0x00,0x00,0x00};					 //·¢Éä·ÉÅÌ
+int8_t ShootModeData1[8]={0x0F,0x00,0x55,0x55,0xFF,0xFF,0xE5,0x66};    //µÚÒ»¸öÎ»ÖÃ
+int8_t ShootModeData2[8]={0x0F,0x00,0x55,0x55,0xFF,0xFF,0x0C,0x66};    //µÚ¶þ¸öÎ»ÖÃ
+int8_t ShootModeData3[8]={0x0F,0x00,0x55,0x55,0xFF,0xFE,0x33,0x66};    //µÚÈý¸öÎ»ÖÃ
 int ControlData[8]={0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};						 //Ò£¿ØÆ÷½ÓÊÕÊý¾Ý
 int LimData[8]={0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};								 //ÏÞÎ»½ÓÊÕÊý¾Ý
 int8_t brushlessData[8]={0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};   
@@ -134,8 +139,8 @@ struct state
 
 //À¶³¡²ÎÊý
 int8_t position_stateB[8]  ={  0,	  0,	166,	249,	166,	  0,	249,	249};		//¶ÔÓ¦×´Ì¬·Ö±ðÎª0 1 2 3 4 5 ½ü Ô¶
-int8_t angle_stateB[8]     ={	0,	170,	165 ,	185,	163,	172,	170,	131};
-int8_t brushless_stateB[8] ={	0,	130,	130,	132,	130,	130,	 82,	162};
+int8_t angle_stateB[8]     ={	0,	170,	165 ,	185,	172,	174,	183,	139};
+int8_t brushless_stateB[8] ={	0,	128,	128,	132,	129,	130,	 82,	172};
 int16_t Counter_Data[8][8]={
 														{		 0, 1800, 2450, 2725, 2700, 3150, 1000,   80},
 														{	2250,	   0,	 500,	 865,  900, 1300, 3300, 2330},
@@ -151,8 +156,8 @@ int16_t Counter_Data[8][8]={
 													 
 //ºì³¡²ÎÊý											 
 int8_t position_state[8]  ={  0,	  0,	166,	249,	166,	  0,	249,	249};		//¶ÔÓ¦×´Ì¬·Ö±ðÎª0 1 2 3 4 5 3½ü 3Ô¶
-int8_t angle_state[8]     ={	0,	170,	170,	194,	177,	177,	176,	129};
-int8_t brushless_state[8] ={	0,	129,	127,	132,	127,	129,	 82,	157};
+int8_t angle_state[8]     ={	0,	170,	170,	194,	172,	177,	176,	129};
+int8_t brushless_state[8] ={	0,	129,	127,	134,	129,	129,	 82,	165};
 int16_t CounterF_Data[8][8]={																															//ºì³¡
 														{		 0, 2700, 2150, 2250, 2020, 1250,  500, 3800},
 														{	1400,	   0,	3570,	3720, 3450, 2750, 2000, 1020},
@@ -170,6 +175,7 @@ enum CHOOSE_FLAG{ GO,SHOOT1,SHOOT5,STOP,ZERO }choose_flag;									//Ò£¿Ø×´Ì¬Ã¶¾
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE END PV */
+int Shootcount=0;
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
@@ -357,6 +363,7 @@ int main(void)
 //		printf("ADC2:%d\t",AD2);
 		MotorVeloticy_Init(); 
 		MotorLocation_Init();
+		SendData(hcan1,0x135,ShootModeData1);
 		HAL_CAN_Receive_IT(&hcan1,CAN_FIFO0);
 		HAL_CAN_Receive_IT(&hcan2,CAN_FIFO0);
 		//location_send(-2000,-800);
@@ -568,6 +575,7 @@ int main(void)
 		location_send(position,angle);
 	if(Now_state==0)       //Æðµã
 	{
+	
 		if(Next_state==1)
 		{ 
 		Encode_set;
@@ -1047,7 +1055,9 @@ int main(void)
 	{
 		if(Next_state==0)
 		{
-						speed_send(-100,-100,-100,100);
+				if(Shootcount>=50)
+			SendData(hcan1,0x135,ShootModeData1);
+			speed_send(-100,-100,-100,100);
 	get_AD1_and_AD2();
 	while(__fabs(AD1-AD2)>25)
 {
@@ -1355,6 +1365,8 @@ int main(void)
 	{
 		if(Next_state==0)
 		{
+				if(Shootcount>=50)
+			SendData(hcan1,0x135,ShootModeData1);
 			speed_send(-100,-100,-100,100);
 		get_AD1_and_AD2();
 		while(__fabs(AD1-AD2)>25)
@@ -1710,6 +1722,8 @@ int main(void)
 	{
 		if(Next_state==0)
 		{
+				if(Shootcount>=50)
+			SendData(hcan1,0x135,ShootModeData1);
 			speed_send(-100,-100,-100,100);
 		get_AD1_and_AD2();
 		while(__fabs(AD1-AD2)>25)
@@ -2023,6 +2037,8 @@ int main(void)
 	{
 		if(Next_state==0)
 		{
+				if(Shootcount>=50)
+			SendData(hcan1,0x135,ShootModeData1);
 			speed_send(-100,-100,-100,100);
 		get_AD1_and_AD2();
 		while(__fabs(AD1-AD2)>25)
@@ -2378,6 +2394,8 @@ int main(void)
 	{
 		if(Next_state==0)
 		{
+				if(Shootcount>=50)
+			SendData(hcan1,0x135,ShootModeData1);
 			speed_send(-100,-100,-100,100);
 		get_AD1_and_AD2();
 		while(__fabs(AD1-AD2)>25)
@@ -2695,6 +2713,8 @@ int main(void)
 	{
 		if(Next_state==0)
 		{
+				if(Shootcount>=50)
+			SendData(hcan1,0x135,ShootModeData1);
 			speed_send(-100,-100,-100,100);
 		get_AD1_and_AD2();
 		while(__fabs(AD1-AD2)>25)
@@ -3071,6 +3091,8 @@ int main(void)
 	{
 		if(Next_state==0)
 		{
+				if(Shootcount>=50)
+			SendData(hcan1,0x135,ShootModeData1);
 			speed_send(-100,-100,-100,100);
 		get_AD1_and_AD2();
 		while(__fabs(AD1-AD2)>25)
@@ -3443,10 +3465,44 @@ int main(void)
 	}
 	else if(choose_flag==SHOOT1)
 	{	
-			SendData(hcan1,0x212,ShootData);
+		  Shootcount++;
+		
+    
+     if(Shootcount<18)
+		 {
+			SendData(hcan1,0x212,ShootData1);
 			HAL_Delay(500);
-			SendData(hcan1,0x211,ShootData);
+			SendData(hcan1,0x211,ShootData1);
 			HAL_Delay(500);
+		 }
+     if(Shootcount>18&&Shootcount<36)
+		 {
+			SendData(hcan1,0x212,ShootData2);
+			HAL_Delay(500);
+			SendData(hcan1,0x211,ShootData2);
+			HAL_Delay(500);
+		 }
+		  if(Shootcount>36)
+		 {
+			SendData(hcan1,0x212,ShootData3);
+			HAL_Delay(500);
+			SendData(hcan1,0x211,ShootData3);
+			HAL_Delay(500);
+		 }
+		 
+		 if(Shootcount == 18)
+		 {
+			 SendData(hcan1,0x135,ShootModeData2);
+		 }
+	   if(Shootcount == 36)
+		 {
+			 SendData(hcan1,0x135,ShootModeData3);
+		 }
+		/* if(Shootcount == 52)
+		 {
+			 SendData(hcan1,0x135,ShootModeData1);
+		 }
+		*/ 
 			choose_flag=ZERO;
 	}
 	else if(choose_flag==SHOOT5)
@@ -3980,6 +4036,9 @@ int main(void)
 	{
 		if(Next_state==0)
 		{
+			if(Shootcount>=50)
+			SendData(hcan1,0x135,ShootModeData1);
+			
 			speed_send(-100,-100,-100,100);
 		get_AD1_and_AD2();
 		while(__fabs(AD1-AD2)>25)
@@ -4345,6 +4404,8 @@ int main(void)
 	{
 		if(Next_state==0)
 		{
+			if(Shootcount>=50)
+			SendData(hcan1,0x135,ShootModeData1);
 			speed_send(-100,-100,-100,100);
 		get_AD1_and_AD2();
 		while(__fabs(AD1-AD2)>25)
@@ -4677,6 +4738,8 @@ int main(void)
 	{
 		if(Next_state==0)
 		{
+				if(Shootcount>=50)
+			SendData(hcan1,0x135,ShootModeData1);
 			speed_send(-100,-100,-100,100);
 		get_AD1_and_AD2();
 		while(__fabs(AD1-AD2)>25)
@@ -4987,6 +5050,8 @@ int main(void)
 	{
 		if(Next_state==0)
 		{
+				if(Shootcount>=50)
+			SendData(hcan1,0x135,ShootModeData1);
 			speed_send(-100,-100,-100,100);
 		get_AD1_and_AD2();
 		while(__fabs(AD1-AD2)>25)
@@ -5298,6 +5363,8 @@ int main(void)
 	{
 		if(Next_state==0)
 		{
+				if(Shootcount>=50)
+			SendData(hcan1,0x135,ShootModeData1);
 			speed_send(-100,-100,-100,100);
 		get_AD1_and_AD2();
 		while(__fabs(AD1-AD2)>25)
@@ -5622,6 +5689,8 @@ int main(void)
 	{
 		if(Next_state==0)
 		{
+				if(Shootcount>=50)
+			SendData(hcan1,0x135,ShootModeData1);
 			speed_send(-100,-100,-100,100);
 		get_AD1_and_AD2();
 		while(__fabs(AD1-AD2)>25)
@@ -5995,6 +6064,8 @@ int main(void)
 	{
 		if(Next_state==0)
 		{
+				if(Shootcount>=50)
+			SendData(hcan1,0x135,ShootModeData1);
 			speed_send(-100,-100,-100,100);
 		get_AD1_and_AD2();
 		while(__fabs(AD1-AD2)>25)
@@ -6410,10 +6481,44 @@ int main(void)
 }
 	else if(choose_flag==SHOOT1)
 	{	
-			SendData(hcan1,0x212,ShootData);
+		
+	   Shootcount++;
+     
+     if(Shootcount<18)
+		 {
+			SendData(hcan1,0x212,ShootData1);
 			HAL_Delay(500);
-			SendData(hcan1,0x211,ShootData);
+			SendData(hcan1,0x211,ShootData1);
 			HAL_Delay(500);
+		 }
+     if(Shootcount>18&&Shootcount<36)
+		 {
+			SendData(hcan1,0x212,ShootData2);
+			HAL_Delay(500);
+			SendData(hcan1,0x211,ShootData2);
+			HAL_Delay(500);
+		 }
+		  if(Shootcount>36)
+		 {
+			SendData(hcan1,0x212,ShootData3);
+			HAL_Delay(500);
+			SendData(hcan1,0x211,ShootData3);
+			HAL_Delay(500);
+		 }
+		 
+		 if(Shootcount == 18)
+		 {
+			 SendData(hcan1,0x135,ShootModeData2);
+		 }
+	   if(Shootcount == 36)
+		 {
+			 SendData(hcan1,0x135,ShootModeData3);
+		 }
+		/* if(Shootcount == 52)
+		 {
+			 SendData(hcan1,0x135,ShootModeData1);
+		 }*/
+		 
 		  choose_flag=ZERO;
 	}
 	else if(choose_flag==SHOOT5)
@@ -6433,18 +6538,20 @@ int main(void)
 }
  if(key_flag_s2==ON)   //ºì³¡Æð²½
 	{
+		start_k =0;
 		speed_send(-1000,-1000,1000,-1000);
 		HAL_Delay(100);
 		TIM_ITConfig(TIM5,TIM_IT_UPDATE,ENABLE);   //Ê¹ÄÜ¸üÐÂÖÐ¶Ï
 	  for(i=1000;i<=20000;i+=1000)
 		{
+			start_k++;
      	get_AD1_and_AD2();
       speed_rotate= (int16_t)(kp_rotate*(AD1-AD2)); 
 		  speed_distance= (int16_t)(kp_distance*(AD1+AD2-AD_INIT));
-			speed_change[0]=-i- speed_rotate + 5*speed_distance;
-			speed_change[1]=-i- speed_rotate - 5*speed_distance;
-			speed_change[2]=i- speed_rotate - 5*speed_distance;
-			speed_change[3]=-i+ speed_rotate - 5*speed_distance;
+			speed_change[0]=-i- speed_rotate + start_k/3*speed_distance;
+			speed_change[1]=-i- speed_rotate - start_k/3*speed_distance;
+			speed_change[2]=i- speed_rotate - start_k/3*speed_distance;
+			speed_change[3]=-i+ speed_rotate - start_k/3*speed_distance;
 		  speed_send(speed_change[0],speed_change[1],speed_change[2],speed_change[3]);
 			HAL_Delay(100);
 		}	
@@ -6516,12 +6623,65 @@ int main(void)
       speed_rotate= (int16_t)(kp_rotate*(AD1-AD2)); 
 		//	speed_error=(int16_t)(kp_distance*(AD1+AD2-AD_INIT));
 		  speed_distance= (int16_t)(kp_distance*(AD1+AD2-AD_INIT));
-			speed_change[0]=i- speed_rotate + 5*speed_distance;
-			speed_change[1]=i- speed_rotate - 5*speed_distance;
-			speed_change[2]=-i- speed_rotate - 5*speed_distance;
-			speed_change[3]=i+ speed_rotate - 5*speed_distance;
+			speed_change[0]=i- speed_rotate + start_k/3*speed_distance;
+			speed_change[1]=i- speed_rotate - start_k/3*speed_distance;
+			speed_change[2]=-i- speed_rotate - start_k/3*speed_distance;
+			speed_change[3]=i+ speed_rotate - start_k/3*speed_distance;
 		  speed_send(speed_change[0],speed_change[1],speed_change[2],speed_change[3]);
 			HAL_Delay(100);
+			speed_lasterror=speed_error;
+		}	
+		while(Encoder_flag_up+Encoder_flag_down<=10)
+		{
+			get_AD1_and_AD2();
+      speed_rotate= (int16_t)(kp_rotate*(AD1-AD2)); 
+		  speed_distance= (int16_t)(kp_distance*(AD1+AD2-AD_INIT));
+			if((Encoder_flag_up+Encoder_flag_down)<=10)
+			{
+				speed_change[0]=15000- speed_rotate + 5*speed_distance;
+				speed_change[1]=15000- speed_rotate - 5*speed_distance;
+				speed_change[2]=-15000- speed_rotate - 5*speed_distance;
+				speed_change[3]=15000+ speed_rotate - 5*speed_distance;
+			}
+//			else if(((Encoder_flag_up+Encoder_flag_down)==11))
+//			{
+//				speed_change[0]=12000- speed_rotate + 2*speed_distance;
+//				speed_change[1]=12000- speed_rotate - 2*speed_distance;
+//				speed_change[2]=-12000- speed_rotate - 2*speed_distance;
+//				speed_change[3]=12000+ speed_rotate - 2*speed_distance;
+//			}
+//			else if(((Encoder_flag_up+Encoder_flag_down)==12))
+//			{
+//				speed_change[0]=6000- speed_rotate + speed_distance;
+//				speed_change[1]=6000- speed_rotate - speed_distance;
+//				speed_change[2]=-6000- speed_rotate - speed_distance;
+//				speed_change[3]=6000+ speed_rotate - speed_distance;
+//			}
+//			else
+//			{
+//				speed_change[0]=3000- speed_rotate + speed_distance;
+//				speed_change[1]=3000- speed_rotate - speed_distance;
+//				speed_change[2]=-3000- speed_rotate - speed_distance;
+//				speed_change[3]=3000+ speed_rotate - speed_distance;
+//			}
+		  speed_send(speed_change[0],speed_change[1],speed_change[2],speed_change[3]);
+			speed_lasterror=speed_error;
+			Encoder_data=__HAL_TIM_GET_COUNTER(&htim5);
+		}	
+		start_k=15;
+			  for(i=15000;i>=2000;i-=1000)
+		{
+			start_k--;
+     	get_AD1_and_AD2();
+      speed_rotate= (int16_t)(kp_rotate*(AD1-AD2)); 
+		//	speed_error=(int16_t)(kp_distance*(AD1+AD2-AD_INIT));
+		  speed_distance= (int16_t)(kp_distance*(AD1+AD2-AD_INIT));
+			speed_change[0]=i- speed_rotate + start_k/3*speed_distance;
+			speed_change[1]=i- speed_rotate - start_k/3*speed_distance;
+			speed_change[2]=-i- speed_rotate - start_k/3*speed_distance;
+			speed_change[3]=i+ speed_rotate - start_k/3*speed_distance;
+		  speed_send(speed_change[0],speed_change[1],speed_change[2],speed_change[3]);
+			HAL_Delay(50);
 			speed_lasterror=speed_error;
 		}	
 		while(Encoder_flag_up+Encoder_flag_down<=13)
@@ -6529,38 +6689,14 @@ int main(void)
 			get_AD1_and_AD2();
       speed_rotate= (int16_t)(kp_rotate*(AD1-AD2)); 
 		  speed_distance= (int16_t)(kp_distance*(AD1+AD2-AD_INIT));
-			if((Encoder_flag_up+Encoder_flag_down)<=10)
-			{
-				speed_change[0]=15000- speed_rotate + 4*speed_distance;
-				speed_change[1]=15000- speed_rotate - 4*speed_distance;
-				speed_change[2]=-15000- speed_rotate - 4*speed_distance;
-				speed_change[3]=15000+ speed_rotate - 4*speed_distance;
-			}
-			else if(((Encoder_flag_up+Encoder_flag_down)==11))
-			{
-				speed_change[0]=10000- speed_rotate + 2*speed_distance;
-				speed_change[1]=10000- speed_rotate - 2*speed_distance;
-				speed_change[2]=-10000- speed_rotate - 2*speed_distance;
-				speed_change[3]=10000+ speed_rotate - 2*speed_distance;
-			}
-			else if(((Encoder_flag_up+Encoder_flag_down)==12))
-			{
-				speed_change[0]=6000- speed_rotate + speed_distance;
-				speed_change[1]=6000- speed_rotate - speed_distance;
-				speed_change[2]=-6000- speed_rotate - speed_distance;
-				speed_change[3]=6000+ speed_rotate - speed_distance;
-			}
-			else
-			{
-				speed_change[0]=3000- speed_rotate + speed_distance;
-				speed_change[1]=3000- speed_rotate - speed_distance;
-				speed_change[2]=-3000- speed_rotate - speed_distance;
-				speed_change[3]=3000+ speed_rotate - speed_distance;
-			}
+				speed_change[0]=2000- speed_rotate + speed_distance;
+				speed_change[1]=2000- speed_rotate - speed_distance;
+				speed_change[2]=-2000- speed_rotate - speed_distance;
+				speed_change[3]=2000+ speed_rotate - speed_distance;
 		  speed_send(speed_change[0],speed_change[1],speed_change[2],speed_change[3]);
 			speed_lasterror=speed_error;
 			Encoder_data=__HAL_TIM_GET_COUNTER(&htim5);
-		}		
+		}	
 	while(__fabs(Encode_counter-50)>40)
 		{
 			get_AD1_and_AD2();
@@ -7128,12 +7264,12 @@ static void MotorLocation_Init(void)
 {
 	SendData(hcan1,0x110,ResetData);
 	SendData(hcan1,0x120,ResetData);
-
+  SendData(hcan1,0x130,ResetData);
 	HAL_Delay(1000);
 	
 	SendData(hcan1,0x111,LocationModeData);
 	SendData(hcan1,0x121,LocationModeData);
-	
+	SendData(hcan1,0x131,LocationModeData);
 	HAL_Delay(1000);
 	
 	SendData(hcan1,0x11A,LimitModeData);
